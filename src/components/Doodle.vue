@@ -1,57 +1,46 @@
 <template>
-  <component :is="tag" class="doodle" :class="`doodle--${type}`">
-    <svg v-if="type === 'underline'" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="doodle__svg">
-      <path d="M4 8 Q50 2 100 7 Q150 12 196 5" stroke="url(#doodleGrad1)" stroke-width="3" stroke-linecap="round" fill="none" :style="filterStyle"/>
-      <defs>
-        <linearGradient id="doodleGrad1" x1="0" y1="0" x2="200" y2="0">
-          <stop offset="0%" stop-color="#FF7EB3"/>
-          <stop offset="50%" stop-color="#8A5CFF"/>
-          <stop offset="100%" stop-color="#2BD9C5"/>
-        </linearGradient>
-      </defs>
+  <component :is="tag" class="doodle" :class="`doodle--${type}`" aria-hidden="true">
+    <!-- 星星 -->
+    <svg v-if="type === 'star'" viewBox="0 0 24 24" class="doodle__svg" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2 L14.5 9 L22 9.5 L16 14 L18 21.5 L12 17.5 L6 21.5 L8 14 L2 9.5 L9.5 9 Z"
+            fill="#FFE66D" stroke="#2D2D2D" stroke-width="2" stroke-linejoin="round"/>
     </svg>
-    <svg v-else-if="type === 'star'" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="doodle__svg">
-      <path d="M12 2 L14 9 L21 9 L15.5 13.5 L17.5 21 L12 16.5 L6.5 21 L8.5 13.5 L3 9 L10 9 Z" :fill="color" opacity="0.8"/>
+    <!-- 手绘箭头 -->
+    <svg v-else-if="type === 'arrow'" viewBox="0 0 80 40" class="doodle__svg" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 28 C 20 8, 44 8, 62 22" fill="none" stroke="#2D2D2D" stroke-width="3" stroke-linecap="round"/>
+      <path d="M52 12 L64 22 L52 32" fill="none" stroke="#2D2D2D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <svg v-else-if="type === 'arrow'" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="doodle__svg">
-      <path d="M4 15 Q20 5 40 15 Q50 20 55 12" stroke="#8A5CFF" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M48 8 L56 12 L50 19" stroke="#8A5CFF" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <!-- 波浪线 -->
+    <svg v-else-if="type === 'wave'" viewBox="0 0 200 12" class="doodle__svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M2 6 Q 15 0, 30 6 T 60 6 T 90 6 T 120 6 T 150 6 T 180 6 T 198 6"
+            fill="none" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
     </svg>
-    <svg v-else-if="type === 'circle'" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="doodle__svg">
-      <circle cx="50" cy="50" r="45" stroke="url(#doodleGrad2)" stroke-width="2.5" fill="none" stroke-dasharray="8 6" :style="filterStyle"/>
-      <defs>
-        <linearGradient id="doodleGrad2" x1="0" y1="0" x2="100" y2="100">
-          <stop offset="0%" stop-color="#FF7EB3"/>
-          <stop offset="100%" stop-color="#2BD9C5"/>
-        </linearGradient>
-      </defs>
+    <!-- 对话框 -->
+    <svg v-else-if="type === 'speech'" viewBox="0 0 60 50" class="doodle__svg" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 4 H56 V36 H22 L10 48 L13 36 H4 Z"
+            fill="#FFFFFF" stroke="#2D2D2D" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+    <!-- 胶带贴纸 -->
+    <svg v-else-if="type === 'tape'" viewBox="0 0 80 30" class="doodle__svg" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 9 L76 5 L76 24 L4 28 Z" fill="#FFE66D" stroke="#2D2D2D" stroke-width="2" stroke-linejoin="round" opacity="0.9"/>
+      <line x1="14" y1="7" x2="14" y2="27" stroke="#2D2D2D" stroke-width="1" opacity="0.25"/>
+      <line x1="66" y1="6" x2="66" y2="25" stroke="#2D2D2D" stroke-width="1" opacity="0.25"/>
     </svg>
   </component>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-
-const props = defineProps({
+defineProps({
   type: {
     type: String,
-    default: 'underline',
-    validator: (v) => ['underline', 'star', 'arrow', 'circle'].includes(v)
+    default: 'star',
+    validator: (v) => ['star', 'arrow', 'wave', 'speech', 'tape'].includes(v)
   },
   tag: {
     type: String,
     default: 'span'
-  },
-  color: {
-    type: String,
-    default: '#FFD86B'
   }
 })
-
-// SVG feTurbulence filter for hand-drawn effect
-const filterStyle = computed(() => ({
-  filter: 'url(#roughen)'
-}))
 </script>
 
 <style scoped>
@@ -64,29 +53,29 @@ const filterStyle = computed(() => ({
   display: block;
 }
 
-.doodle--underline {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-}
-
-.doodle--underline .doodle__svg {
-  width: 100%;
-  height: 12px;
-}
-
 .doodle--star {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .doodle--arrow {
-  width: 60px;
-  height: 30px;
+  width: 70px;
+  height: 35px;
 }
 
-.doodle--circle {
-  width: 100px;
-  height: 100px;
+.doodle--wave {
+  width: 100%;
+  max-width: 200px;
+  height: 12px;
+}
+
+.doodle--speech {
+  width: 60px;
+  height: 50px;
+}
+
+.doodle--tape {
+  width: 80px;
+  height: 30px;
 }
 </style>

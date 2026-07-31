@@ -1,0 +1,14 @@
+/* === 字体定义（Nost 手绘漫画杂志风格） === */
+/* Google Fonts 在 index.html 中通过 <link> 引入（带 preconnect）：
+ *   - Shrikhand / Bangers : 漫画粗黑展示体（标题）
+ *   - Nunito              : 英文正文（清晰圆体无衬线）
+ *   - Noto Sans SC        : 中文正文（思源黑体）
+ */
+
+:root {
+  /* 标题：英文 Shrikhand / Bangers，中文回退系统粗黑体，最后 Impact */
+  --font-display: 'Shrikhand', 'Bangers', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', Impact, sans-serif;
+  /* 正文：英文 Nunito + 中文思源黑体 */
+  --font-body: 'Nunito', 'Noto Sans SC', sans-serif;
+  --font-chinese: 'Noto Sans SC', sans-serif;
+}

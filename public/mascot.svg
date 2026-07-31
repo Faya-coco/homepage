@@ -1,36 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <!-- 主体：代码小星球 -->
-  <defs>
-    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF7EB3"/>
-      <stop offset="50%" stop-color="#8A5CFF"/>
-      <stop offset="100%" stop-color="#2BD9C5"/>
-    </linearGradient>
-    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FFD86B"/>
-      <stop offset="100%" stop-color="#FF7EB3"/>
-    </linearGradient>
-  </defs>
-  <!-- 星球主体 -->
-  <circle cx="100" cy="105" r="60" fill="url(#bodyGrad)" opacity="0.9"/>
-  <!-- 星球环 -->
-  <ellipse cx="100" cy="105" rx="85" ry="20" stroke="url(#ringGrad)" stroke-width="4" fill="none" transform="rotate(-15 100 105)"/>
-  <!-- 眼镜 -->
-  <circle cx="82" cy="98" r="14" stroke="#1F1430" stroke-width="3" fill="white" opacity="0.9"/>
-  <circle cx="118" cy="98" r="14" stroke="#1F1430" stroke-width="3" fill="white" opacity="0.9"/>
-  <line x1="96" y1="98" x2="104" y2="98" stroke="#1F1430" stroke-width="3"/>
+  <!-- 漫画风格 IP：戴耳机的代码小怪兽 -->
+  <!-- 天线 -->
+  <line x1="100" y1="30" x2="100" y2="50" stroke="#2D2D2D" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="100" cy="26" r="7" fill="#FFE66D" stroke="#2D2D2D" stroke-width="4"/>
+  <!-- 身体（圆角矩形，珊瑚红 + 粗黑描边） -->
+  <rect x="38" y="50" width="124" height="122" rx="30" fill="#FF6B6B" stroke="#2D2D2D" stroke-width="5"/>
+  <!-- 耳机头带 -->
+  <path d="M55 96 Q100 54 145 96" stroke="#2D2D2D" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- 耳罩（柠檬黄） -->
+  <rect x="42" y="90" width="24" height="36" rx="9" fill="#FFE66D" stroke="#2D2D2D" stroke-width="5"/>
+  <rect x="134" y="90" width="24" height="36" rx="9" fill="#FFE66D" stroke="#2D2D2D" stroke-width="5"/>
   <!-- 眼睛 -->
-  <circle cx="82" cy="99" r="5" fill="#1F1430"/>
-  <circle cx="118" cy="99" r="5" fill="#1F1430"/>
-  <circle cx="84" cy="97" r="2" fill="white"/>
-  <circle cx="120" cy="97" r="2" fill="white"/>
-  <!-- 微笑 -->
-  <path d="M88 115 Q100 128 112 115" stroke="#1F1430" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <!-- 代码符号装饰 -->
-  <text x="55" y="75" font-family="monospace" font-size="16" fill="#1F1430" opacity="0.6">&lt;/&gt;</text>
-  <text x="125" y="140" font-family="monospace" font-size="14" fill="#1F1430" opacity="0.5">{ }</text>
-  <!-- 星星装饰 -->
-  <path d="M40 50 L43 58 L50 58 L44 63 L46 70 L40 66 L34 70 L36 63 L30 58 L37 58 Z" fill="#FFD86B"/>
-  <path d="M155 45 L157 50 L162 50 L158 53 L159 58 L155 55 L151 58 L152 53 L148 50 L153 50 Z" fill="#FF7EB3" opacity="0.8"/>
-  <path d="M160 150 L162 155 L167 155 L163 158 L164 163 L160 160 L156 163 L157 158 L153 155 L158 155 Z" fill="#2BD9C5" opacity="0.7"/>
+  <circle cx="82" cy="106" r="12" fill="#FFFFFF" stroke="#2D2D2D" stroke-width="4"/>
+  <circle cx="118" cy="106" r="12" fill="#FFFFFF" stroke="#2D2D2D" stroke-width="4"/>
+  <circle cx="84" cy="108" r="5.5" fill="#2D2D2D"/>
+  <circle cx="120" cy="108" r="5.5" fill="#2D2D2D"/>
+  <circle cx="86" cy="106" r="1.8" fill="#FFFFFF"/>
+  <circle cx="122" cy="106" r="1.8" fill="#FFFFFF"/>
+  <!-- 腮红 -->
+  <circle cx="66" cy="128" r="7" fill="#FF8E8E" opacity="0.55"/>
+  <circle cx="134" cy="128" r="7" fill="#FF8E8E" opacity="0.55"/>
+  <!-- 嘴巴（微笑） -->
+  <path d="M82 132 Q100 148 118 132" stroke="#2D2D2D" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- 胸前代码符号 -->
+  <text x="100" y="163" font-family="monospace" font-size="22" font-weight="bold" fill="#FFFFFF" text-anchor="middle">&lt;/&gt;</text>
 </svg>

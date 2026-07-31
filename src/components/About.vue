@@ -1,37 +1,62 @@
 <template>
   <section id="about" class="about">
-    <div class="container">
+    <div class="container about__inner">
       <div class="about__header">
-        <h2 class="about__title display-font">
-          关于
-          <span class="about__title-highlight">
-            我
-            <Doodle type="underline" class="about__doodle-underline" />
-          </span>
-        </h2>
-        <Doodle type="arrow" class="about__doodle-arrow" />
+        <h2 class="about__title display-font title-stroke">关于我</h2>
+        <Doodle type="wave" class="about__wave" />
       </div>
-      <div class="about__content">
-        <div class="about__bio">
-          <p class="about__bio-text">{{ profile.bio }}</p>
-        </div>
-        <div class="about__skills">
-          <h3 class="about__skills-title">技能栈</h3>
-          <div class="about__chips">
-            <span
-              v-for="(skill, index) in profile.skills"
-              :key="skill"
-              class="about__chip"
-              :style="{ '--chip-delay': index * 0.05 + 's' }"
-            >
-              {{ skill }}
-            </span>
+
+      <div class="about__body">
+        <!-- 左：身份卡（头像 + 教育） -->
+        <aside class="about__id">
+          <div class="about__avatar-wrap">
+            <img :src="profile.avatar" :alt="profile.name" class="about__avatar" />
+          </div>
+          <h3 class="about__name display-font">{{ profile.name }}</h3>
+          <p class="about__alias">{{ profile.alias }} · {{ profile.title }}</p>
+          <div class="about__divider"></div>
+          <div class="about__edu">
+            <p class="about__edu-school">{{ profile.school }}</p>
+            <p class="about__edu-period">{{ profile.schoolPeriod }}</p>
+          </div>
+          <p class="about__coursework">
+            <span class="about__label">主修课程</span>
+            {{ profile.coursework }}
+          </p>
+          <p class="about__extras">
+            <span class="about__label">其他</span>
+            {{ profile.extras }}
+          </p>
+        </aside>
+
+        <!-- 右：简介 + 技能三组 -->
+        <div class="about__detail">
+          <p class="about__bio">{{ profile.bio }}</p>
+
+          <div class="about__skills">
+            <div class="about__skill-group">
+              <h4 class="about__skill-title">熟练</h4>
+              <div class="about__chips">
+                <span v-for="s in profile.skills.proficient" :key="s" class="about__chip about__chip--proficient">{{ s }}</span>
+              </div>
+            </div>
+            <div class="about__skill-group">
+              <h4 class="about__skill-title">了解</h4>
+              <div class="about__chips">
+                <span v-for="s in profile.skills.familiar" :key="s" class="about__chip about__chip--familiar">{{ s }}</span>
+              </div>
+            </div>
+            <div class="about__skill-group">
+              <h4 class="about__skill-title">学习中</h4>
+              <div class="about__chips">
+                <span v-for="s in profile.skills.learning" :key="s" class="about__chip about__chip--learning">{{ s }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- 角落装饰 -->
-    <Doodle type="star" class="about__corner-star" color="#2BD9C5" />
+    <Doodle type="star" class="about__corner" />
   </section>
 </template>
 
@@ -43,123 +68,200 @@ import Doodle from './Doodle.vue'
 <style scoped>
 .about {
   padding: var(--section-padding) 0;
-  background: var(--bg-alt);
+  background: var(--nost-bg-alt);
   position: relative;
   overflow: hidden;
+  border-top: var(--stroke-dashed);
+}
+
+.about__inner {
+  position: relative;
 }
 
 .about__header {
-  display: flex;
-  align-items: flex-end;
-  gap: 1rem;
   margin-bottom: 3rem;
 }
 
 .about__title {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  color: var(--text-primary);
-  line-height: 1.2;
-}
-
-.about__title-highlight {
-  position: relative;
+  font-size: clamp(2.8rem, 7vw, 4.5rem);
   display: inline-block;
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
-.about__doodle-underline {
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 100%;
-  max-width: none;
+.about__wave {
+  width: 180px;
+  margin-top: 0.5rem;
+  display: block;
 }
 
-.about__doodle-arrow {
-  margin-bottom: 0.5rem;
-}
-
-.about__content {
+.about__body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 2.5rem;
   align-items: start;
 }
 
-.about__bio-text {
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  color: var(--text-secondary);
-  line-height: 1.9;
+/* 左：身份卡 */
+.about__id {
+  background: var(--nost-card);
+  border: var(--stroke);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-offset);
+  padding: 1.8rem;
+  text-align: center;
+  transform: rotate(-1.5deg);
 }
 
-.about__skills-title {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  color: var(--text-primary);
+.about__avatar-wrap {
+  display: inline-block;
+  padding: 5px;
+  background: var(--nost-yellow);
+  border: var(--stroke);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-offset-sm);
   margin-bottom: 1rem;
+}
+
+.about__avatar {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.about__name {
+  font-size: 2rem;
+  color: var(--nost-ink);
+  line-height: 1.1;
+}
+
+.about__alias {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--nost-ink-soft);
+  margin-top: 0.2rem;
+}
+
+.about__divider {
+  height: 0;
+  border-top: var(--stroke-dashed);
+  margin: 1rem 0;
+}
+
+.about__edu-school {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--nost-ink);
+}
+
+.about__edu-period {
+  font-size: 0.82rem;
+  color: var(--nost-ink-soft);
+  margin-top: 0.2rem;
+}
+
+.about__coursework,
+.about__extras {
+  font-size: 0.82rem;
+  color: var(--nost-ink-soft);
+  margin-top: 0.8rem;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.about__label {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--nost-coral);
+  margin-right: 0.3rem;
+}
+
+/* 右：简介 + 技能 */
+.about__bio {
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  color: var(--nost-ink);
+  line-height: 1.9;
+  background: var(--nost-card);
+  border: var(--stroke);
+  box-shadow: var(--shadow-offset);
+  padding: 1.6rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.8rem;
+}
+
+.about__skills {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.about__skill-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--nost-ink);
+  margin-bottom: 0.5rem;
 }
 
 .about__chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .about__chip {
   display: inline-block;
-  padding: 0.5rem 1.2rem;
-  background: var(--bg-card);
-  border: 2px solid transparent;
-  border-radius: var(--radius-xl);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  box-shadow: var(--shadow-soft);
-  transition: all var(--transition-base);
-  animation: chipIn 0.5s var(--ease-out) var(--chip-delay) both;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--nost-ink);
+  transition: transform var(--transition-base);
+}
+
+.about__chip--proficient {
+  background: var(--nost-yellow);
+  border: var(--stroke-thin);
+  box-shadow: var(--shadow-offset-sm);
+}
+
+.about__chip--familiar {
+  background: var(--nost-card);
+  border: var(--stroke-thin);
+}
+
+.about__chip--learning {
+  background: var(--nost-bg);
+  border: 2px dashed var(--nost-ink-soft);
+  color: var(--nost-ink-soft);
 }
 
 .about__chip:hover {
-  transform: translateY(-3px) rotate(-2deg);
-  border-color: var(--candy-purple);
-  box-shadow: var(--shadow-card);
+  transform: rotate(-3deg) translate(-2px, -2px);
 }
 
-@keyframes chipIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.about__corner-star {
+.about__corner {
   position: absolute;
-  bottom: 2rem;
-  right: 3rem;
-  width: 28px;
-  opacity: 0.6;
-  animation: twinkle 3s ease-in-out infinite;
+  bottom: 1.5rem;
+  right: 2.5rem;
+  width: 30px;
+  animation: swing 4s ease-in-out infinite;
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(0.8); }
+@keyframes swing {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
 }
 
 @media (max-width: 768px) {
-  .about__content {
+  .about__body {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.8rem;
   }
-  .about__header {
-    margin-bottom: 2rem;
+  .about__id {
+    transform: rotate(0deg);
+  }
+  .about__corner {
+    display: none;
   }
 }
 </style>

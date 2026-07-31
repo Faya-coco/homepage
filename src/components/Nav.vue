@@ -1,18 +1,8 @@
 <template>
   <nav class="nav" :class="{ 'nav--scrolled': isScrolled }">
     <div class="container nav__inner">
-      <a href="#hero" class="nav__brand">
-        <span class="nav__brand-name">{{ profile.name }}</span>
-        <svg class="nav__doodle" viewBox="0 0 80 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 5 Q20 1 40 5 Q60 9 78 4" stroke="url(#navDoodleGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <defs>
-            <linearGradient id="navDoodleGrad" x1="0" y1="0" x2="80" y2="0">
-              <stop offset="0%" stop-color="#FF7EB3"/>
-              <stop offset="50%" stop-color="#8A5CFF"/>
-              <stop offset="100%" stop-color="#2BD9C5"/>
-            </linearGradient>
-          </defs>
-        </svg>
+      <a href="#hero" class="nav__brand display-font">
+        Faya<span class="nav__brand-dot">.</span>
       </a>
       <div class="nav__links">
         <a href="#about" class="nav__link">关于</a>
@@ -25,21 +15,13 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { profile } from '../data/profile.js'
 
 const isScrolled = ref(false)
-
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50
+  isScrolled.value = window.scrollY > 40
 }
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll, { passive: true })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+onMounted(() => window.addEventListener('scroll', handleScroll, { passive: true }))
+onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>
 
 <style scoped>
@@ -55,10 +37,10 @@ onUnmounted(() => {
 }
 
 .nav--scrolled {
-  background: rgba(255, 247, 251, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 2px 20px rgba(138, 92, 255, 0.06);
+  background: rgba(245, 245, 240, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: var(--stroke);
   padding: 0.6rem 0;
 }
 
@@ -69,70 +51,49 @@ onUnmounted(() => {
 }
 
 .nav__brand {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.nav__brand-name {
-  font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 700;
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--nost-coral);
+  -webkit-text-stroke: 1px var(--nost-ink);
+  paint-order: stroke fill;
   line-height: 1;
 }
 
-.nav__doodle {
-  width: 60px;
-  height: 6px;
-  margin-top: 2px;
+.nav__brand-dot {
+  color: var(--nost-ink);
 }
 
 .nav__links {
   display: flex;
-  gap: 2rem;
+  gap: 0.5rem;
 }
 
 .nav__link {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  transition: color var(--transition-base);
-  position: relative;
-}
-
-.nav__link::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gradient-main);
-  border-radius: 2px;
-  transition: width var(--transition-base);
+  padding: 0.4rem 1.1rem;
+  border-radius: var(--radius-pill);
+  border: var(--stroke-thin);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--nost-ink);
+  background: var(--nost-card);
+  transition: all var(--transition-base);
 }
 
 .nav__link:hover {
-  color: var(--text-primary);
+  background: var(--nost-ink);
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-offset-sm);
 }
 
-.nav__link:hover::after {
-  width: 100%;
-}
-
-@media (max-width: 480px) {
+@media (max-width: 375px) {
   .nav__links {
-    gap: 1.2rem;
+    gap: 0.3rem;
   }
   .nav__link {
-    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
   }
-  .nav__brand-name {
+  .nav__brand {
     font-size: 1.6rem;
   }
 }

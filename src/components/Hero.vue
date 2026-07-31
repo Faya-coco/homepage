@@ -1,64 +1,39 @@
 <template>
   <section id="hero" class="hero">
-    <!-- Canvas 粒子背景 -->
-    <CanvasParticles />
-    <!-- 光标跟随柔光 -->
-    <div class="hero__glow" ref="glowEl" :style="glowStyle"></div>
-    <!-- 涂鸦装饰 -->
-    <Doodle type="star" class="hero__star hero__star--1" color="#FFD86B" />
-    <Doodle type="star" class="hero__star hero__star--2" color="#FF7EB3" />
-    <Doodle type="star" class="hero__star hero__star--3" color="#2BD9C5" />
-    <!-- 主内容 -->
+    <!-- 漫画装饰 -->
+    <Doodle type="star" class="hero__deco hero__deco--1" />
+    <Doodle type="star" class="hero__deco hero__deco--2" />
+    <Doodle type="arrow" class="hero__deco hero__deco--3" />
+    <Doodle type="tape" class="hero__tape" />
+
     <div class="container hero__content">
-      <div class="hero__text">
-        <p class="hero__greeting display-font">Hi, I'm</p>
-        <h1 class="hero__name display-font">
-          <span class="gradient-text">{{ profile.name }}</span>
-        </h1>
-        <p class="hero__tagline">{{ profile.tagline }}</p>
-        <div class="hero__cta">
-          <a href="#projects" class="hero__btn hero__btn--primary">
-            看看我的作品
-            <span class="hero__btn-arrow">→</span>
-          </a>
-          <a href="#contact" class="hero__btn hero__btn--secondary">联系我</a>
+      <p class="hero__greeting display-font">你好，我是方严</p>
+      <h1 class="hero__name display-font title-stroke">FAYA</h1>
+      <p class="hero__tagline">{{ profile.tagline }}</p>
+
+      <div class="hero__main">
+        <div class="hero__note">
+          <Doodle type="tape" class="hero__note-tape" />
+          <p>{{ profile.heroNote }}</p>
+        </div>
+        <div class="hero__visual">
+          <img src="../assets/mascot.svg" alt="Faya 吉祥物" class="hero__mascot" />
         </div>
       </div>
-      <div class="hero__visual">
-        <img src="../assets/mascot.svg" alt="Faya Mascot" class="hero__mascot" />
+
+      <div class="hero__cta">
+        <a href="#projects" class="btn btn--primary">
+          看看我的作品 <span>→</span>
+        </a>
+        <a href="#contact" class="btn btn--ghost">联系我</a>
       </div>
-    </div>
-    <!-- 底部波浪过渡 -->
-    <div class="hero__wave">
-      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0 60 Q360 0 720 60 Q1080 120 1440 60 L1440 120 L0 120 Z" fill="var(--bg-alt)"/>
-      </svg>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
 import { profile } from '../data/profile.js'
-import CanvasParticles from './CanvasParticles.vue'
 import Doodle from './Doodle.vue'
-
-const glowEl = ref(null)
-const glowStyle = ref({})
-
-const handleMouseMove = (e) => {
-  glowStyle.value = {
-    background: `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(138, 92, 255, 0.06), transparent 60%)`
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('mousemove', handleMouseMove, { passive: true })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('mousemove', handleMouseMove)
-})
 </script>
 
 <style scoped>
@@ -67,51 +42,85 @@ onUnmounted(() => {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: var(--bg-primary);
+  background: var(--nost-bg);
   overflow: hidden;
-}
-
-.hero__glow {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 }
 
 .hero__content {
   position: relative;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  padding-top: 5rem;
-  padding-bottom: 8rem;
-}
-
-.hero__text {
-  flex: 1;
-  max-width: 600px;
+  z-index: 2;
+  width: 100%;
 }
 
 .hero__greeting {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  color: var(--text-secondary);
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--nost-ink);
+  margin-bottom: 0.2rem;
 }
 
 .hero__name {
-  font-size: clamp(3rem, 12vw, 8rem);
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.95;
+  margin-bottom: 0.8rem;
+  letter-spacing: 2px;
 }
 
 .hero__tagline {
   font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  color: var(--text-secondary);
+  color: var(--nost-ink-soft);
+  font-weight: 700;
   margin-bottom: 2.5rem;
-  max-width: 450px;
+}
+
+.hero__main {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero__note {
+  position: relative;
+  flex: 1;
+  background: var(--nost-card);
+  border: var(--stroke-dashed);
+  box-shadow: var(--shadow-offset);
+  padding: 2rem 1.8rem;
+  border-radius: var(--radius-md);
+  transform: rotate(-2deg);
+  max-width: 560px;
+}
+
+.hero__note p {
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  color: var(--nost-ink);
+  line-height: 1.8;
+}
+
+.hero__note-tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 70px;
+}
+
+.hero__visual {
+  flex: 0 0 auto;
+}
+
+.hero__mascot {
+  width: clamp(170px, 24vw, 280px);
+  height: auto;
+  filter: drop-shadow(6px 6px 0 rgba(45, 45, 45, 0.15));
+  animation: bob 4s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
 }
 
 .hero__cta {
@@ -120,135 +129,58 @@ onUnmounted(() => {
   flex-wrap: wrap;
 }
 
-.hero__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.9rem 2rem;
-  border-radius: var(--radius-xl);
-  font-weight: 700;
-  font-size: 1rem;
-  transition: all var(--transition-base);
-}
-
-.hero__btn--primary {
-  background: var(--gradient-main);
-  color: white;
-  box-shadow: 0 4px 20px rgba(138, 92, 255, 0.3);
-}
-
-.hero__btn--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(138, 92, 255, 0.4);
-}
-
-.hero__btn--secondary {
-  background: transparent;
-  color: var(--candy-purple);
-  border: 2px solid var(--candy-purple);
-}
-
-.hero__btn--secondary:hover {
-  background: rgba(138, 92, 255, 0.08);
-  transform: translateY(-2px);
-}
-
-.hero__btn-arrow {
-  transition: transform var(--transition-base);
-}
-
-.hero__btn--primary:hover .hero__btn-arrow {
-  transform: translateX(4px);
-}
-
-.hero__visual {
-  flex: 0 0 auto;
-  position: relative;
-}
-
-.hero__mascot {
-  width: clamp(180px, 25vw, 320px);
-  height: auto;
-  animation: float 4s ease-in-out infinite;
-  filter: drop-shadow(0 20px 40px rgba(138, 92, 255, 0.2));
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-/* 星星装饰 */
-.hero__star {
+/* 装饰定位 + 摆动 */
+.hero__deco {
   position: absolute;
-  z-index: 5;
-  animation: twinkle 3s ease-in-out infinite;
+  z-index: 1;
 }
 
-.hero__star--1 {
-  top: 15%;
-  right: 10%;
-  width: 32px;
-  animation-delay: 0s;
+.hero__deco--1 {
+  top: 14%;
+  right: 8%;
+  animation: swing 4s ease-in-out infinite;
 }
 
-.hero__star--2 {
+.hero__deco--2 {
   top: 30%;
-  left: 5%;
-  width: 20px;
-  animation-delay: 1s;
+  left: 4%;
+  animation: swing 5s ease-in-out infinite 0.5s;
 }
 
-.hero__star--3 {
-  bottom: 25%;
-  right: 20%;
-  width: 24px;
-  animation-delay: 2s;
+.hero__deco--3 {
+  bottom: 18%;
+  right: 14%;
+  animation: swing 4.5s ease-in-out infinite 1s;
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.8; transform: scale(1) rotate(0deg); }
-  50% { opacity: 0.4; transform: scale(0.8) rotate(15deg); }
-}
-
-/* 底部波浪 */
-.hero__wave {
+.hero__tape {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
+  top: 10%;
+  left: 10%;
+  width: 70px;
+  z-index: 1;
+  opacity: 0.9;
+  transform: rotate(-12deg);
 }
 
-.hero__wave svg {
-  width: 100%;
-  height: 80px;
-  display: block;
+@keyframes swing {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
 }
 
-/* 响应式 */
 @media (max-width: 768px) {
-  .hero__content {
-    flex-direction: column;
-    text-align: center;
-    padding-top: 6rem;
+  .hero__main {
+    flex-direction: column-reverse;
+    gap: 2rem;
   }
-  .hero__text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .hero__tagline {
-    text-align: center;
-  }
-  .hero__cta {
-    justify-content: center;
-  }
-  .hero__visual {
-    order: -1;
+  .hero__note {
+    transform: rotate(-1deg);
   }
   .hero__mascot {
-    width: 160px;
+    width: 150px;
+  }
+  .hero__deco--2 {
+    display: none;
   }
 }
 </style>

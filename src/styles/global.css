@@ -1,53 +1,48 @@
-/* === 全局 CSS 变量：糖果渐变配色 === */
+/* 引入字体变量定义（字体 stack） */
+@import './fonts.css';
+
+/* === 全局 CSS 变量：Nost 手绘漫画杂志风格 === */
 :root {
-  /* 糖果渐变色 */
-  --candy-pink: #FF7EB3;
-  --candy-purple: #8A5CFF;
-  --candy-cyan: #2BD9C5;
-  --candy-yellow: #FFD86B;
+  /* Nost 配色（5.1.1） */
+  --nost-coral: #FF6B6B;       /* 主色：珊瑚红 / 番茄红 */
+  --nost-bg: #F5F5F0;          /* 主背景：米白 / 浅灰 */
+  --nost-bg-alt: #EDECE6;      /* 交替区块背景：浅米灰 */
+  --nost-card: #FFFFFF;        /* 卡片背景 */
+  --nost-ink: #2D2D2D;         /* 文字与描边：深炭灰 */
+  --nost-ink-soft: #6B6B6B;    /* 次要文字 */
+  --nost-yellow: #FFE66D;      /* 点缀：柠檬黄 */
+  --nost-mint: #4ECDC4;        /* 次要按钮 / 链接 hover：薄荷青 */
 
-  /* 渐变 */
-  --gradient-main: linear-gradient(135deg, #FF7EB3 0%, #8A5CFF 50%, #2BD9C5 100%);
-  --gradient-accent: linear-gradient(135deg, #8A5CFF 0%, #2BD9C5 100%);
-  --gradient-warm: linear-gradient(135deg, #FF7EB3 0%, #FFD86B 100%);
+  /* 描边（5.1.3） */
+  --stroke: 3px solid var(--nost-ink);
+  --stroke-thin: 2px solid var(--nost-ink);
+  --stroke-dashed: 3px dashed var(--nost-ink);
 
-  /* 背景 */
-  --bg-primary: #FFF7FB;
-  --bg-alt: #FDF2FF;
-  --bg-card: #FFFFFF;
+  /* 偏移阴影（漫画硬阴影，5.1.3） */
+  --shadow-offset: 6px 6px 0 var(--nost-ink);
+  --shadow-offset-coral: 6px 6px 0 var(--nost-coral);
+  --shadow-offset-sm: 4px 4px 0 var(--nost-ink);
+  --shadow-offset-lg: 10px 10px 0 var(--nost-ink);
 
-  /* 文字 */
-  --text-primary: #1F1430;
-  --text-secondary: #6B5B7E;
-  --text-light: #9B8FB0;
+  /* 字体变量已在 fonts.css 中定义：--font-display / --font-body / --font-chinese */
 
-  /* 字体 */
-  --font-display: 'Caveat', cursive;
-  --font-body: 'Nunito', 'Noto Sans SC', sans-serif;
-  --font-chinese: 'Noto Sans SC', sans-serif;
-
-  /* 间距 */
+  /* 间距（5.1.5） */
   --section-padding: clamp(3rem, 8vw, 6rem);
   --container-max: 1200px;
-  --container-padding: clamp(1rem, 4vw, 2rem);
+  --container-padding: clamp(1rem, 4vw, 3rem);
 
   /* 圆角 */
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  --radius-xl: 32px;
-
-  /* 阴影 */
-  --shadow-soft: 0 4px 20px rgba(138, 92, 255, 0.08);
-  --shadow-card: 0 8px 32px rgba(138, 92, 255, 0.12);
-  --shadow-hover: 0 12px 40px rgba(138, 92, 255, 0.18);
+  --radius-pill: 999px;
 
   /* 过渡 */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-base: 0.3s var(--ease-out);
+  --transition-base: 0.2s var(--ease-out);
 }
 
-/* === 全局重置与基础 === */
+/* === 全局重置 === */
 *,
 *::before,
 *::after {
@@ -64,8 +59,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
+  color: var(--nost-ink);
+  background-color: var(--nost-bg);
   line-height: 1.7;
   overflow-x: hidden;
 }
@@ -75,7 +70,8 @@ a {
   text-decoration: none;
 }
 
-img, svg {
+img,
+svg {
   display: block;
   max-width: 100%;
 }
@@ -95,20 +91,71 @@ button {
   padding: 0 var(--container-padding);
 }
 
-/* === 手写标题通用样式 === */
+/* === 展示字体 === */
 .display-font {
   font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 
-/* === 渐变文字 === */
-.gradient-text {
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* === 漫画标题：珊瑚红填充 + 深灰描边 + 硬阴影 === */
+.title-stroke {
+  color: var(--nost-coral);
+  -webkit-text-stroke: 2px var(--nost-ink);
+  paint-order: stroke fill;
+  text-shadow: var(--shadow-offset-sm);
 }
 
-/* === 减少动效偏好 === */
+/* === 通用粗描边胶囊按钮 === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  font-size: 1rem;
+  border: var(--stroke);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base), color var(--transition-base);
+}
+
+.btn--primary {
+  background: var(--nost-coral);
+  color: #fff;
+  box-shadow: var(--shadow-offset-sm);
+}
+
+.btn--primary:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-offset);
+  background: #ff5252;
+}
+
+.btn--ghost {
+  background: var(--nost-card);
+  color: var(--nost-ink);
+  box-shadow: var(--shadow-offset-sm);
+}
+
+.btn--ghost:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-offset);
+  background: var(--nost-yellow);
+}
+
+/* === 滚动揭示（5.1.4，Intersection Observer 触发） === */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === 减少动效偏好（5.1.4） === */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -119,5 +166,9 @@ button {
   }
   html {
     scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -4,10 +4,9 @@
       <img src="../assets/mascot.svg" alt="" class="footer__mascot" aria-hidden="true" />
       <div class="footer__text">
         <p class="footer__made display-font">
-          Made with <span class="gradient-text">♥</span> by
-          <span class="gradient-text footer__name">{{ profile.name }}</span>
+          Made with <span class="footer__heart">♥</span> by 方严 · Faya
         </p>
-        <p class="footer__year">&copy; {{ currentYear }}</p>
+        <p class="footer__year">© {{ currentYear }} · {{ profile.title }}</p>
       </div>
     </div>
   </footer>
@@ -15,28 +14,26 @@
 
 <script setup>
 import { profile } from '../data/profile.js'
-
 const currentYear = new Date().getFullYear()
 </script>
 
 <style scoped>
 .footer {
   padding: 2.5rem 0;
-  background: var(--bg-primary);
-  border-top: 1px solid rgba(138, 92, 255, 0.1);
+  background: var(--nost-bg);
+  border-top: var(--stroke);
 }
 
 .footer__inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .footer__mascot {
-  width: 48px;
-  height: 48px;
-  opacity: 0.7;
+  width: 52px;
+  height: 52px;
 }
 
 .footer__text {
@@ -44,24 +41,25 @@ const currentYear = new Date().getFullYear()
 }
 
 .footer__made {
-  font-size: 1.3rem;
-  color: var(--text-secondary);
+  font-size: 1.5rem;
+  color: var(--nost-ink);
 }
 
-.footer__name {
-  font-weight: 700;
+.footer__heart {
+  color: var(--nost-coral);
 }
 
 .footer__year {
   font-size: 0.85rem;
-  color: var(--text-light);
-  margin-top: 0.3rem;
+  color: var(--nost-ink-soft);
+  margin-top: 0.2rem;
+  font-weight: 600;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 375px) {
   .footer__inner {
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.6rem;
   }
 }
 </style>
