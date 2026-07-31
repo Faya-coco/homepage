@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- 主体：代码小星球 -->
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7EB3"/>
+      <stop offset="50%" stop-color="#8A5CFF"/>
+      <stop offset="100%" stop-color="#2BD9C5"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFD86B"/>
+      <stop offset="100%" stop-color="#FF7EB3"/>
+    </linearGradient>
+  </defs>
+  <!-- 星球主体 -->
+  <circle cx="100" cy="105" r="60" fill="url(#bodyGrad)" opacity="0.9"/>
+  <!-- 星球环 -->
+  <ellipse cx="100" cy="105" rx="85" ry="20" stroke="url(#ringGrad)" stroke-width="4" fill="none" transform="rotate(-15 100 105)"/>
+  <!-- 眼镜 -->
+  <circle cx="82" cy="98" r="14" stroke="#1F1430" stroke-width="3" fill="white" opacity="0.9"/>
+  <circle cx="118" cy="98" r="14" stroke="#1F1430" stroke-width="3" fill="white" opacity="0.9"/>
+  <line x1="96" y1="98" x2="104" y2="98" stroke="#1F1430" stroke-width="3"/>
+  <!-- 眼睛 -->
+  <circle cx="82" cy="99" r="5" fill="#1F1430"/>
+  <circle cx="118" cy="99" r="5" fill="#1F1430"/>
+  <circle cx="84" cy="97" r="2" fill="white"/>
+  <circle cx="120" cy="97" r="2" fill="white"/>
+  <!-- 微笑 -->
+  <path d="M88 115 Q100 128 112 115" stroke="#1F1430" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- 代码符号装饰 -->
+  <text x="55" y="75" font-family="monospace" font-size="16" fill="#1F1430" opacity="0.6">&lt;/&gt;</text>
+  <text x="125" y="140" font-family="monospace" font-size="14" fill="#1F1430" opacity="0.5">{ }</text>
+  <!-- 星星装饰 -->
+  <path d="M40 50 L43 58 L50 58 L44 63 L46 70 L40 66 L34 70 L36 63 L30 58 L37 58 Z" fill="#FFD86B"/>
+  <path d="M155 45 L157 50 L162 50 L158 53 L159 58 L155 55 L151 58 L152 53 L148 50 L153 50 Z" fill="#FF7EB3" opacity="0.8"/>
+  <path d="M160 150 L162 155 L167 155 L163 158 L164 163 L160 160 L156 163 L157 158 L153 155 L158 155 Z" fill="#2BD9C5" opacity="0.7"/>
+</svg>
